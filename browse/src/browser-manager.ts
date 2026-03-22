@@ -23,7 +23,23 @@ export class BrowserManager {
   private refMap: Map<string, Locator> = new Map();
 
   async launch() {
-    this.browser = await chromium.launch({ headless: true });
+    this.browser = await chromium.launch({
+      headless: true,
+      args: [
+        '--disable-background-networking',
+        '--disable-client-side-phishing-detection',
+        '--disable-default-apps',
+        '--disable-extensions',
+        '--disable-sync',
+        '--disable-translate',
+        '--metrics-recording-only',
+        '--no-first-run',
+        '--safebrowsing-disable-auto-update',
+        '--disable-component-update',
+        '--disable-domain-reliability',
+        '--disable-features=AutofillServerCommunication',
+      ],
+    });
 
     // Chromium crash → exit with clear message
     this.browser.on('disconnected', () => {

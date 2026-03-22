@@ -8,6 +8,10 @@
  *   Auto-shutdown after BROWSE_IDLE_TIMEOUT (default 30 min)
  */
 
+// ─── Privacy: disable Playwright/Chromium telemetry ─────────────
+process.env.PLAYWRIGHT_SKIP_BROWSER_GC = '1';
+process.env.DO_NOT_TRACK = '1';
+
 import { BrowserManager } from './browser-manager';
 import { handleReadCommand } from './read-commands';
 import { handleWriteCommand } from './write-commands';
